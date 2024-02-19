@@ -5,6 +5,7 @@
 import * as $_well_known_webfinger from "./routes/.well-known/webfinger.ts";
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
+import * as $application from "./routes/application.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $reset from "./routes/reset.ts";
 import * as $test from "./routes/test.ts";
@@ -19,6 +20,7 @@ const manifest = {
     "./routes/.well-known/webfinger.ts": $_well_known_webfinger,
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
+    "./routes/application.tsx": $application,
     "./routes/index.tsx": $index,
     "./routes/reset.ts": $reset,
     "./routes/test.ts": $test,
