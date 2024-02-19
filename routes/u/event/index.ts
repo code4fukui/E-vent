@@ -7,7 +7,10 @@ export const handler: Handlers = {
   async GET(_req, _ctx) {
     const public_key_pem = await getPublicKey();
     return Response.json({
-      '@context': ['https://www.w3.org/ns/activitystreams', 'https://w3id.org/security/v1'],
+      "@context": [
+        "https://www.w3.org/ns/activitystreams",
+        "https://w3id.org/security/v1",
+      ],
       "id": `${entrypoint}u/event`,
       "type": "Person",
       "inbox": `${entrypoint}u/event/inbox`,
@@ -17,19 +20,19 @@ export const handler: Handlers = {
       "url": `${entrypoint}u/event`,
       publicKey: {
         id: `${entrypoint}u/event`,
-        type: 'Key',
+        type: "Key",
         owner: `${entrypoint}u/event`,
         publicKeyPem: public_key_pem,
       },
       "icon": {
         "type": "Image",
         "mediaType": "image/jpeg",
-        "url": "https://res.cloudinary.com/dp8x1rtwn/image/upload/v1708208658/deno/tama_of1lfh.jpg"
-      }
+        "url": "https://e-vent.deno.dev/icon.jpg",
+      },
     }, {
       headers: {
-        "Content-Type": "application/activity+json; charset=utf-8"
-      }
+        "Content-Type": "application/activity+json; charset=utf-8",
+      },
     });
   },
 };
