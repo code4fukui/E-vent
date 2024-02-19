@@ -3,10 +3,6 @@ import { addNote } from "./activity_pub.ts";
 
 // 起動時にイベント情報を取得
 export let eventData: EventData[];
-await updateEventData();
-
-Deno.cron("data update", "0 0 * * *", updateEventData);
-Deno.cron("teiki housou", "0 * * * *", teiki);
 
 interface EventData {
   title: string;
