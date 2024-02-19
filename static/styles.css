@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .ev-button {
+    @apply w-fit mx-auto border-solid border-2 border-orange-500 px-4 py-2 rounded-full font-bold text-orange-500 transition-colors
+  }
+  .ev-button:hover {
+    @apply bg-orange-500 text-white
+  }
+
+  .ev-input {
+    @apply max-w-2xl border-solid border-2 border-gray-500 px-4 py-2 rounded-full
+  }
+  .ev-input:focus {
+    @apply border-orange-500
+  }
+}

@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <header class="max-w-screen-md mx-auto flex items-center justify-center">
+    <header class="max-w-screen-md mx-auto my-4 flex items-center justify-center">
       <a href="/">
         <h1 class="text-4xl font-bold">E-vent</h1>
       </a>
