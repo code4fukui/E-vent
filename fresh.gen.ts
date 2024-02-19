@@ -2,17 +2,29 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $_well_known_webfinger from "./routes/.well-known/webfinger.ts";
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $index from "./routes/index.tsx";
+import * as $reset from "./routes/reset.ts";
+import * as $test from "./routes/test.ts";
+import * as $u_event_followers from "./routes/u/event/followers.ts";
+import * as $u_event_inbox from "./routes/u/event/inbox.ts";
+import * as $u_event_index from "./routes/u/event/index.ts";
 import * as $Counter from "./islands/Counter.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
+    "./routes/.well-known/webfinger.ts": $_well_known_webfinger,
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
     "./routes/index.tsx": $index,
+    "./routes/reset.ts": $reset,
+    "./routes/test.ts": $test,
+    "./routes/u/event/followers.ts": $u_event_followers,
+    "./routes/u/event/inbox.ts": $u_event_inbox,
+    "./routes/u/event/index.ts": $u_event_index,
   },
   islands: {
     "./islands/Counter.tsx": $Counter,
