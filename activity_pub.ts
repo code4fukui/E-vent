@@ -1,15 +1,15 @@
 import { kv } from "./kv.ts";
 import { entrypoint } from "./const.ts";
 
-export function stob(s) {
+export function stob(s: string) {
   return Uint8Array.from(s, (c) => c.charCodeAt(0));
 }
 
-export function btos(b) {
+export function btos(b: ArrayBuffer) {
   return String.fromCharCode(...new Uint8Array(b));
 }
 
-export async function importprivateKey(pem) {
+export async function importprivateKey(pem: string) {
   const pemHeader = "-----BEGIN PRIVATE KEY-----";
   const pemFooter = "-----END PRIVATE KEY-----";
   if (pem.startsWith('"')) pem = pem.slice(1);
@@ -34,7 +34,7 @@ export async function importprivateKey(pem) {
   return r;
 }
 
-export async function privateKeyToPublicKey(key) {
+export async function privateKeyToPublicKey(key: CryptoKey) {
   const jwk = await crypto.subtle.exportKey("jwk", key);
   if ("kty" in jwk) {
     delete jwk.d;
@@ -59,7 +59,7 @@ export async function privateKeyToPublicKey(key) {
   return r;
 }
 
-export async function exportPublicKey(key) {
+export async function exportPublicKey(key: CryptoKey) {
   const der = await crypto.subtle.exportKey("spki", key);
   if ("byteLength" in der) {
     let pemContents = btoa(btos(der));
@@ -74,7 +74,7 @@ export async function exportPublicKey(key) {
   }
 }
 
-export async function getInbox(req) {
+export async function getInbox(req: string) {
   const res = await fetch(req, {
     method: "GET",
     headers: { Accept: "application/activity+json" },
@@ -82,7 +82,11 @@ export async function getInbox(req) {
   return res.json();
 }
 
-export async function postInbox(req, data, headers) {
+export async function postInbox(
+  req: string,
+  data: any,
+  headers: { [key: string]: string },
+) {
   const res = await fetch(req, {
     method: "POST",
     body: JSON.stringify(data),
@@ -91,7 +95,11 @@ export async function postInbox(req, data, headers) {
   return res;
 }
 
-export async function signHeaders(res, strInbox, privateKey) {
+export async function signHeaders(
+  res: any,
+  strInbox: string,
+  privateKey: CryptoKey,
+) {
   const strTime = new Date().toUTCString();
   const s = await crypto.subtle.digest(
     "SHA-256",
@@ -125,7 +133,7 @@ export async function signHeaders(res, strInbox, privateKey) {
   return headers;
 }
 
-export async function acceptFollow(x, y, privateKey) {
+export async function acceptFollow(x: any, y: any, privateKey: CryptoKey) {
   const strId = crypto.randomUUID();
   const strInbox = x.inbox;
   const res = {
@@ -139,7 +147,12 @@ export async function acceptFollow(x, y, privateKey) {
   await postInbox(strInbox, res, headers);
 }
 
-export async function createNote(strId, x, y, privateKey, hostname) {
+export async function createNote(
+  strId: string,
+  x: any,
+  y: string,
+  privateKey: CryptoKey,
+) {
   const strTime = new Date().toISOString().substring(0, 19) + "Z";
   const strInbox = x.inbox;
   const res = {
@@ -165,37 +178,28 @@ export async function createNote(strId, x, y, privateKey, hostname) {
   await postInbox(strInbox, res, headers);
 }
 
-/**
- * 秘密鍵
- * @returns {Promise<string>}
- */
+/** 秘密鍵 */
 export async function getPrivateKey() {
-  const ID_RSA = Deno.env.get("ID_RSA");
+  const ID_RSA = Deno.env.get("ID_RSA")!;
   return await importprivateKey(ID_RSA);
 }
 
-/**
- * 公開鍵
- * @returns {Promise<string>}
- */
+/** 公開鍵 */
 export async function getPublicKey() {
-  const ID_RSA = Deno.env.get("ID_RSA");
+  const ID_RSA = Deno.env.get("ID_RSA")!;
   const PRIVATE_KEY = await importprivateKey(ID_RSA);
   const PUBLIC_KEY = await privateKeyToPublicKey(PRIVATE_KEY);
   return await exportPublicKey(PUBLIC_KEY);
 }
 
-/**
- * ツイートする
- * @param {string} messageBody 
- */
-export async function addNote(messageBody) {
+/** ツイートする */
+export async function addNote(messageBody: string) {
   const messageId = crypto.randomUUID();
   const PRIVATE_KEY = await getPrivateKey();
 
   await kv.set(["messages", messageId], {
     id: messageId,
-    body: messageBody
+    body: messageBody,
   });
 
   for await (const follower of kv.list({ prefix: ["followers"] })) {
