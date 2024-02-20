@@ -7,6 +7,7 @@ import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $application from "./routes/application.tsx";
 import * as $index from "./routes/index.tsx";
+import * as $permit from "./routes/permit.tsx";
 import * as $reset from "./routes/reset.ts";
 import * as $test from "./routes/test.ts";
 import * as $u_event_followers from "./routes/u/event/followers.ts";
@@ -22,6 +23,7 @@ const manifest = {
     "./routes/_app.tsx": $_app,
     "./routes/application.tsx": $application,
     "./routes/index.tsx": $index,
+    "./routes/permit.tsx": $permit,
     "./routes/reset.ts": $reset,
     "./routes/test.ts": $test,
     "./routes/u/event/followers.ts": $u_event_followers,
