@@ -5,8 +5,8 @@ export default function Application() {
   return (
     <Fragment>
       <Header />
-      <main class="max-w-screen-md mx-auto px-8">
-        <h2 class="mb-4 text-2xl font-bold">イベント開催申請</h2>
+      <main class="ev-main">
+        <h2 class="ev-title">イベント開催申請</h2>
         <form method="post" class="mx-auto flex flex-col gap-2">
           <input
             class="ev-input"
