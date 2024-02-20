@@ -1,4 +1,3 @@
-import { useSignal } from "@preact/signals";
 import Header from "../components/Header.tsx";
 import { Fragment } from "preact";
 import { Handlers } from "$fresh/server.ts";
