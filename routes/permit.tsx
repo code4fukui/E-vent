@@ -3,38 +3,16 @@ import { Fragment } from "preact";
 import { EventItem } from "../interface/EventItem.interface.ts";
 import Header from "../components/Header.tsx";
 import EventCard from "../components/EventCard.tsx";
+import { kv } from "../kv.ts";
 
 export const handler: Handlers<EventItem[]> = {
-  GET(_req, ctx) {
-    return ctx.render([{
-      title: "test",
-      date: new Date("2024-02-21 16:40:23"),
-      description: "テストイベント",
-      placement: "jigオフィス",
-      hash: "0ho800kjvg",
-      thumbnailUrl: "",
-    }, {
-      title: "test",
-      date: new Date("2024-02-21 16:40:23"),
-      description: "テストイベント",
-      placement: "jigオフィス",
-      hash: "0ho800kjvg",
-      thumbnailUrl: "",
-    }, {
-      title: "test",
-      date: new Date("2024-02-21 16:40:23"),
-      description: "テストイベント",
-      placement: "jigオフィス",
-      hash: "0ho800kjvg",
-      thumbnailUrl: "",
-    }, {
-      title: "test",
-      date: new Date("2024-02-21 16:40:23"),
-      description: "テストイベント",
-      placement: "jigオフィス",
-      hash: "0ho800kjvg",
-      thumbnailUrl: "",
-    }]);
+  async GET(_req, ctx) {
+    const list = kv.list<EventItem>({ prefix: ["eventItems"] });
+    const eventItems = [];
+    for await (const eventItem of list) {
+      eventItems.push(eventItem.value);
+    }
+    return ctx.render(eventItems);
   },
 };
 

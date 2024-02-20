@@ -1,5 +1,33 @@
+import { Handlers, PageProps } from "$fresh/server.ts";
 import { Fragment } from "preact";
 import Header from "../components/Header.tsx";
+import { kv } from "../kv.ts";
+
+export const handler: Handlers = {
+  GET(_req, ctx) {
+    return ctx.render();
+  },
+  async POST(req, ctx) {
+    const url = new URL(req.url);
+    const form = await req.formData();
+    const hash = crypto.randomUUID();
+    const title = form.get("title");
+    const description = form.get("description");
+    const date = new Date(Date.parse(form.get("date") as string));
+    const placement = form.get("placement");
+    const thumbnailUrl = "";
+    const eventItem = {
+      hash,
+      title,
+      description,
+      date,
+      placement,
+      thumbnailUrl,
+    };
+    await kv.set(["eventItems", eventItem.hash], eventItem);
+    return Response.redirect(url.origin + "/");
+  },
+};
 
 export default function Application() {
   return (
