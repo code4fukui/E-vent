@@ -19,7 +19,7 @@
 
 
   .ev-input {
-    @apply max-w-2xl border-solid border-2 border-gray-500 px-4 py-2 rounded-full
+    @apply w-full border-solid border-2 border-gray-500 px-4 py-2 rounded-full
   }
 
   .ev-main {

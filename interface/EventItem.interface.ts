@@ -16,6 +16,6 @@ export interface EventItem {
   description: string;
   placement: string;
   thumbnailUrl: string;
-  joinners: JoinPost[];
-  comments: CommentPost[];
+  joinners?: JoinPost[];
+  comments?: CommentPost[];
 }
