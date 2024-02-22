@@ -10,6 +10,14 @@
     @apply bg-orange-500 text-white
   }
 
+  .ev-button-danger {
+    @apply w-fit mx-auto border-solid border-2 border-red-500 px-4 py-2 rounded-full font-bold text-red-500 transition-colors
+  }
+  .ev-button-danger:hover, .ev-button-danger:focus {
+    @apply bg-red-500 text-white
+  }
+
+
   .ev-input {
     @apply max-w-2xl border-solid border-2 border-gray-500 px-4 py-2 rounded-full
   }
