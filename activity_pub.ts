@@ -206,4 +206,101 @@ export async function addNote(messageBody: string) {
     const x = await getInbox(follower.value.id);
     await createNote(messageId, x, messageBody, PRIVATE_KEY);
   }
+  return messageId;
+}
+
+export async function follow(x: { [key: string]: any }) {
+  const strId = crypto.randomUUID();
+  const body = {
+    "@context": "https://www.w3.org/ns/activitystreams",
+    id: `${entrypoint}/u/event/s/${strId}`,
+    type: "Follow",
+    actor: `${entrypoint}u/event`,
+    object: x.id,
+  };
+  await postActivity(x.inbox, body);
+}
+
+export async function getActivity(req: string) {
+  const PRIVATE_KEY = await getPrivateKey();
+  if (!PRIVATE_KEY) {
+    return;
+  }
+  const strTime = new Date().toUTCString();
+  const sig = await crypto.subtle.sign(
+    "RSASSA-PKCS1-v1_5",
+    PRIVATE_KEY,
+    stob(
+      [
+        `(request-target): get ${new URL(req).pathname}`,
+        `host: ${new URL(req).hostname}`,
+        `date: ${strTime}`,
+      ].join("\n"),
+    ),
+  );
+  const b64 = btoa(btos(sig));
+  const headers = {
+    Host: new URL(req).hostname,
+    Date: strTime,
+    Signature: [
+      `keyId="${entrypoint}u/event#Key"`,
+      'algorithm="rsa-sha256"',
+      'headers="(request-target) host date"',
+      `signature="${b64}"`,
+    ].join(),
+    Accept: "application/activity+json",
+    "Accept-Encoding": "identity",
+    "Cache-Control": "no-cache",
+    "User-Agent": `Matchbox/0.8.0 (+https://${entrypoint}/)`,
+  };
+  const res = await fetch(req, { method: "GET", headers });
+  const body = await res.json();
+  console.log("getActivity body = ", body);
+  console.log(`GET ${req} ${res.status}`);
+  return body;
+}
+
+export async function postActivity(req: string, x: { [key: string]: any }) {
+  const PRIVATE_KEY = await getPrivateKey();
+  if (!PRIVATE_KEY) {
+    return;
+  }
+  const strTime = new Date().toUTCString();
+  const body = JSON.stringify(x);
+  const digest = await crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(body),
+  );
+  const s256 = btoa(btos(digest));
+  const sig = await crypto.subtle.sign(
+    "RSASSA-PKCS1-v1_5",
+    PRIVATE_KEY,
+    stob(
+      [
+        `(request-target): post ${new URL(req).pathname}`,
+        `host: ${new URL(req).hostname}`,
+        `date: ${strTime}`,
+        `digest: SHA-256=${s256}`,
+      ].join("\n"),
+    ),
+  );
+  const b64 = btoa(btos(sig));
+  const headers = {
+    Host: new URL(req).hostname,
+    Date: strTime,
+    Digest: `SHA-256=${s256}`,
+    Signature: [
+      `keyId="${entrypoint}u/event#Key"`,
+      'algorithm="rsa-sha256"',
+      'headers="(request-target) host date digest"',
+      `signature="${b64}"`,
+    ].join(),
+    Accept: "application/json",
+    "Accept-Encoding": "gzip",
+    "Cache-Control": "max-age=0",
+    "Content-Type": "application/activity+json",
+    "User-Agent": `Matchbox/0.8.0 (+${entrypoint})`,
+  };
+  console.log(`POST ${req} ${body}`);
+  await fetch(req, { method: "POST", body, headers });
 }
