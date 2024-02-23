@@ -39,14 +39,16 @@ export const handler: Handlers = {
           const messageId = inReplyTo.split("/").slice(-1)[0];
           const message =
             (await kv.get<Message>(["messages", messageId])).value;
+          console.log("message", message);
           const replyMessage = y.object.content.replace(/<[^>]*>/g, "").replace(
             /@\w+/g,
             "",
           ).trim();
-          const eventItem = await kv.get<EventItem>([
+          const eventItem = (await kv.get<EventItem>([
             "eventItems",
             message.event,
-          ]).value;
+          ])).value;
+          console.log("eventItem", eventItem);
           const reply = {
             user: y.actor,
             body: replyMessage,

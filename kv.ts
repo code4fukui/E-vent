@@ -8,4 +8,5 @@ export interface Message {
   id: string;
   body: string;
   type: "joinner" | "comment";
+  event: string;
 }
