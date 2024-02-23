@@ -3,6 +3,7 @@ import { Fragment } from "preact";
 import { EventItem } from "../../interface/EventItem.interface.ts";
 import Header from "../../components/Header.tsx";
 import { kv } from "../../kv.ts";
+import { join } from "$std/path/join.ts";
 
 export const handler: Handlers<EventItem> = {
   async GET(_req, ctx) {
@@ -32,9 +33,16 @@ export default function Event(event: PageProps<EventItem>) {
           <h3 class="text-xl font-bold">参加者一覧</h3>
           {item.joinners !== undefined
             ? (
-              <ul class="mt-2 flex gap-2">
+              <ul class="mt-2">
                 {item.joinners.map((joinner) => {
-                  <span>{joinner.user}</span>;
+                  return (
+                    <li>
+                      {joinner.user.replace(
+                        /http.*\//,
+                        "",
+                      )} さん<br />「{joinner.body}」
+                    </li>
+                  );
                 })}
               </ul>
             )
@@ -45,9 +53,17 @@ export default function Event(event: PageProps<EventItem>) {
           <h3 class="text-xl font-bold">コメント</h3>
           {item.comments !== undefined
             ? (
-              <ul class="mt-2 flex gap-2">
-                {item.comments.map((joinner) => {
-                  <span>{joinner.user}</span>;
+              <ul class="mt-2">
+                {item.comments.map((comment) => {
+                  // console.log(comment);
+                  return (
+                    <li>
+                      {comment.user.replace(
+                        /http.*\//,
+                        "",
+                      )} さん<br />「{comment.body}」
+                    </li>
+                  );
                 })}
               </ul>
             )
