@@ -42,7 +42,7 @@ export const handler: Handlers = {
           ).trim();
           const eventItem = await kv.get<EventItem>([
             "eventItems",
-            message.eventId,
+            message.event,
           ]);
           const reply = {
             user: y.actor,
