@@ -54,7 +54,7 @@ export default function EventCard(
       <div class="px-4 pb-4">
         <h3 class="text-2xl font-bold my-2">{props.event.title}</h3>
         <p>{props.event.description}</p>
-        <section class="flex gap-2 text-xs text-gray-500">
+        <section class="flex gap-2 mt-2 text-xs text-gray-500">
           <p class="w-full">
             ⌚ {genDateString(props.event.date)}
           </p>
