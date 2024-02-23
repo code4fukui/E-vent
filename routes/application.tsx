@@ -4,6 +4,7 @@ import Header from "../components/Header.tsx";
 import { kv } from "../kv.ts";
 import { EventItem } from "../interface/EventItem.interface.ts";
 import ImageInputPreview from "../islands/ImageInputPreview.tsx";
+import { uploadToCloudinary } from "../utils/cloudinary.ts";
 
 export const handler: Handlers = {
   GET(_req, ctx) {
@@ -13,15 +14,25 @@ export const handler: Handlers = {
     const url = new URL(req.url);
     const form = await req.formData();
     const hash = crypto.randomUUID();
+
     const title = form.get("title")?.toString() ?? "no title";
     const description = form.get("description")?.toString() ?? "no description";
     const date = new Date(Date.parse(form.get("date") as string));
     const joinDeadline = new Date(
       Date.parse(form.get("joinDeadline") as string),
     );
-    console.log(form.get("thumbnail"));
     const placement = form.get("placement")?.toString() ?? "no place";
-    const thumbnailUrl = "";
+
+    console.log(
+      typeof form.get("thumbnail"),
+      form.get("thumbnail"),
+    );
+    const thumbnail = new Uint8Array(
+      await (form.get("thumbnail") as File).arrayBuffer(),
+    );
+    const thumbnailUrl = await uploadToCloudinary(thumbnail);
+    console.log(thumbnailUrl);
+
     const eventItem: EventItem = {
       hash,
       title,
@@ -42,7 +53,11 @@ export default function Application() {
       <Header />
       <main class="ev-main">
         <h2 class="ev-title">イベント開催申請</h2>
-        <form method="post" class="mx-auto flex flex-col gap-2">
+        <form
+          method="post"
+          enctype="multipart/form-data"
+          class="mx-auto flex flex-col gap-2"
+        >
           <label>
             イベントタイトル<br />
             <input
