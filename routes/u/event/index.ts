@@ -6,6 +6,9 @@ import { getPublicKey } from "../../../activity_pub.ts";
 export const handler: Handlers = {
   async GET(_req, _ctx) {
     const public_key_pem = await getPublicKey();
+    if (!public_key_pem) {
+      return new Response(null, { status: 500 });
+    }
     return Response.json({
       "@context": [
         "https://www.w3.org/ns/activitystreams",

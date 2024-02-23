@@ -17,7 +17,9 @@ export const handler: Handlers = {
     const y = await req.json();
     const x = await getInbox(y.actor);
     const private_key = await getPrivateKey();
-
+    if (!private_key) {
+      return new Response(null, { status: 500 });
+    }
     if (req.method == "POST") {
       if (y.type == "Follow") {
         await kv.set(["followers", y.actor], { id: y.actor });

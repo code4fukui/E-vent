@@ -181,27 +181,32 @@ export async function createNote(
 /** 秘密鍵 */
 export async function getPrivateKey() {
   const ID_RSA = Deno.env.get("ID_RSA")!;
+  if (!ID_RSA) {
+    return;
+  }
   return await importprivateKey(ID_RSA);
 }
 
 /** 公開鍵 */
 export async function getPublicKey() {
   const ID_RSA = Deno.env.get("ID_RSA")!;
+  if (!ID_RSA) {
+    return;
+  }
   const PRIVATE_KEY = await importprivateKey(ID_RSA);
   const PUBLIC_KEY = await privateKeyToPublicKey(PRIVATE_KEY);
   return await exportPublicKey(PUBLIC_KEY);
 }
 
 /** ツイートする */
-export async function addNote(messageBody: string) {
-  const messageId = crypto.randomUUID();
+export async function addNote(
+  messageId: string,
+  messageBody: string,
+) {
   const PRIVATE_KEY = await getPrivateKey();
-
-  await kv.set(["messages", messageId], {
-    id: messageId,
-    body: messageBody,
-  });
-
+  if (!PRIVATE_KEY) {
+    return;
+  }
   for await (const follower of kv.list({ prefix: ["followers"] })) {
     const x = await getInbox(follower.value.id);
     await createNote(messageId, x, messageBody, PRIVATE_KEY);
