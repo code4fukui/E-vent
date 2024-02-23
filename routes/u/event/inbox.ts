@@ -17,6 +17,9 @@ export const handler: Handlers = {
     const y = await req.json();
     const x = await getInbox(y.actor);
     const private_key = await getPrivateKey();
+    if (!private_key) {
+      return new Response(null, { status: 500 });
+    }
 
     if (req.method == "POST") {
       if (y.type == "Follow") {
@@ -43,7 +46,7 @@ export const handler: Handlers = {
           const eventItem = await kv.get<EventItem>([
             "eventItems",
             message.event,
-          ]);
+          ]).value;
           const reply = {
             user: y.actor,
             body: replyMessage,
@@ -61,6 +64,7 @@ export const handler: Handlers = {
             }
             eventItem.comments.push(reply);
           }
+          // kvにセットするところ
           await kv.set(["eventItems", eventItem.hash], eventItem);
           return new Response();
         }
