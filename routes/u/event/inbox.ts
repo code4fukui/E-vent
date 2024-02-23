@@ -53,13 +53,13 @@ export const handler: Handlers = {
           };
           if (message.type == "joinner") {
             console.log("参加");
-            if (!eventItem.joinners) {
+            if (!("joinners" in eventItem)) {
               eventItem.joinners = [];
             }
             eventItem.joinners.push(reply);
           } else if (message.type == "comment") {
             console.log("コメント");
-            if (!eventItem.comments) {
+            if (!("comments" in eventItem)) {
               eventItem.comments = [];
             }
             eventItem.comments.push(reply);
