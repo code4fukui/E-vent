@@ -21,12 +21,13 @@ export const handler: Handlers = {
     const messageId1 = crypto.randomUUID();
     const messageBody1 = eventItem.title + " 募集";
     await kv.set(["eventItems", eventItem.hash], eventItem);
+
     await kv.set(["messages", messageId1], {
       id: messageId1,
       body: messageBody1,
+      event: eventItem.hash,
       type: "joinner",
     });
-    await kv.set(["eventItemsByMessage", messageId1], eventItem.hash);
     await addNote(messageId1, messageBody1);
 
     // 感想メッセージを投稿
@@ -35,9 +36,9 @@ export const handler: Handlers = {
     await kv.set(["messages", messageId2], {
       id: messageId2,
       body: messageBody2,
+      event: eventItem.hash,
       type: "comment",
     });
-    await kv.set(["eventItemsByMessage", messageId2], eventItem.hash);
     await addNote(messageId2, messageBody2);
 
     return new Response("テスト投稿をしました");
