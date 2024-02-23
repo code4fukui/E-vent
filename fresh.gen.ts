@@ -19,6 +19,7 @@ import * as $u_event_inbox from "./routes/u/event/inbox.ts";
 import * as $u_event_index from "./routes/u/event/index.ts";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $EventCard from "./islands/EventCard.tsx";
+import * as $ImageInputPreview from "./islands/ImageInputPreview.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -42,6 +43,7 @@ const manifest = {
   islands: {
     "./islands/Counter.tsx": $Counter,
     "./islands/EventCard.tsx": $EventCard,
+    "./islands/ImageInputPreview.tsx": $ImageInputPreview,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

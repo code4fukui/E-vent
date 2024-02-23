@@ -3,6 +3,7 @@ import { Fragment } from "preact";
 import Header from "../components/Header.tsx";
 import { kv } from "../kv.ts";
 import { EventItem } from "../interface/EventItem.interface.ts";
+import ImageInputPreview from "../islands/ImageInputPreview.tsx";
 
 export const handler: Handlers = {
   GET(_req, ctx) {
@@ -18,6 +19,7 @@ export const handler: Handlers = {
     const joinDeadline = new Date(
       Date.parse(form.get("joinDeadline") as string),
     );
+    console.log(form.get("thumbnail"));
     const placement = form.get("placement")?.toString() ?? "no place";
     const thumbnailUrl = "";
     const eventItem: EventItem = {
@@ -92,7 +94,7 @@ export default function Application() {
           </label>
           <label>
             サムネイル写真<br />
-            <input type="file" name="thumbnail" id="event-thumbnail" />
+            <ImageInputPreview name="thumbnail" />
           </label>
           <button class="ev-button">
             申請する
