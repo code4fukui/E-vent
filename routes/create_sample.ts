@@ -7,7 +7,7 @@ export const handler: Handlers = {
       const hash = crypto.randomUUID();
       const eventItem = {
         hash,
-        title: "test",
+        title: `test_${i}`,
         date: new Date("2024-02-21 16:40:23"),
         description: "テストイベント",
         placement: "jigオフィス",

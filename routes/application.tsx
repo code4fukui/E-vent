@@ -1,4 +1,4 @@
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { Handlers } from "$fresh/server.ts";
 import { Fragment } from "preact";
 import Header from "../components/Header.tsx";
 import { kv } from "../kv.ts";

@@ -11,6 +11,7 @@ export const handler: Handlers<EventItem[]> = {
     const list = kv.list<EventItem>({ prefix: ["eventItems"] });
     const eventItems = [];
     for await (const eventItem of list) {
+      if (!eventItem.value.permitted) continue;
       eventItems.push(eventItem.value);
     }
     return ctx.render(eventItems);
