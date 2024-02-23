@@ -13,7 +13,6 @@ import * as $event_hash_ from "./routes/event/[hash].tsx";
 import * as $index from "./routes/index.tsx";
 import * as $permit from "./routes/permit.tsx";
 import * as $reset from "./routes/reset.ts";
-import * as $test from "./routes/test.ts";
 import * as $u_event_followers from "./routes/u/event/followers.ts";
 import * as $u_event_inbox from "./routes/u/event/inbox.ts";
 import * as $u_event_index from "./routes/u/event/index.ts";
@@ -35,7 +34,6 @@ const manifest = {
     "./routes/index.tsx": $index,
     "./routes/permit.tsx": $permit,
     "./routes/reset.ts": $reset,
-    "./routes/test.ts": $test,
     "./routes/u/event/followers.ts": $u_event_followers,
     "./routes/u/event/inbox.ts": $u_event_inbox,
     "./routes/u/event/index.ts": $u_event_index,
