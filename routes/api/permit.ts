@@ -31,10 +31,10 @@ export const handler: Handlers = {
     // 募集ツイート
     const messageId1 = crypto.randomUUID();
     const messageBody1 = `
-      参加者募集：${target.title}\n
-      日時：${formatDTS(target.date)}\n
-      場所：${target.placement}\n
-      詳細：https://e-vent.deno.dev/event/${target.hash}\n
+      参加者募集：${target.title}<br>
+      日時：${formatDTS(target.date)}<br>
+      場所：${target.placement}<br>
+      詳細：<a href="https://e-vent.deno.dev/event/${target.hash}">こちら</a><br>
       リプライするとこのイベントに申し込みできます
       `;
     await kv.set(["messages", messageId1], {
@@ -48,10 +48,10 @@ export const handler: Handlers = {
     // 感想募集ツイート
     const messageId2 = crypto.randomUUID();
     const messageBody2 = `
-      感想募集：${target.title}\n
-      日時：${formatDTS(target.date)}\n
-      場所：${target.placement}\n
-      詳細：https://e-vent.deno.dev/event/${target.hash}\n
+      感想募集：${target.title}<br>
+      日時：${formatDTS(target.date)}<br>
+      場所：${target.placement}<br>
+      詳細：<a href="https://e-vent.deno.dev/event/${target.hash}">こちら</a><br>
       このイベントの感想をリプライで募集中
     `;
     await kv.set(["messages", messageId2], {
