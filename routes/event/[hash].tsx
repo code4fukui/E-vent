@@ -32,7 +32,10 @@ export default function Event(event: PageProps<EventItem>) {
         <section>
           <h2 class="ev-title flex">
             {item.title}
-            <CopyToClipboard body={item.hash} />
+            <CopyToClipboard
+              body={item.hash}
+              tooltipText="イベントIDをコピー"
+            />
           </h2>
           <img
             class="w-full h-fit object-cover object-center bg-gray-300"
