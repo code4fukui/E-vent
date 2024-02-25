@@ -58,10 +58,17 @@ export default function Event(event: PageProps<EventItem>) {
                   // console.log(comment);
                   return (
                     <li>
-                      {comment.user.replace(
-                        /http.*\//,
-                        "",
-                      )} さん<br />「{comment.body}」
+                      <a href={comment.url}>
+                        {comment.user.replace(
+                          /http.*\//,
+                          "",
+                        )} さん<br />「{comment.body}」
+                      </a>
+                      {comment.images.map((image) => (
+                        <a href={image}>
+                          <img src={image} width="128" />
+                        </a>
+                      ))}
                     </li>
                   );
                 })}

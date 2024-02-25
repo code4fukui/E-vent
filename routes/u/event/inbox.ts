@@ -54,6 +54,8 @@ export const handler: Handlers = {
           const reply = {
             user: y.actor,
             body: replyMessage,
+            url: y.object.url,
+            images: y.object.attachment.map((a: any) => a.url),
           };
           if (message.type == "joinner") {
             console.log("参加");

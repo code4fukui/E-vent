@@ -1,11 +1,15 @@
 export interface JoinPost {
   body: string;
   user: string;
+  url: string;
+  images: string[];
 }
 
 export interface CommentPost {
   body: string;
   user: string;
+  url: string;
+  images: string[];
 }
 
 export interface EventItem {
