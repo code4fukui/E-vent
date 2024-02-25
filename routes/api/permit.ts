@@ -31,7 +31,7 @@ export const handler: Handlers = {
     // 募集ツイート
     const messageId1 = crypto.randomUUID();
     const messageBody1 = `
-      多摩市のイベントの予定をお知らせします<br>
+      イベントの予定をお知らせします<br>
       イベント名：${target.title}<br>
       日時：${formatDTS(target.date)}<br>
       場所：${target.placement}<br>
@@ -50,7 +50,7 @@ export const handler: Handlers = {
     // 感想募集ツイート
     const messageId2 = crypto.randomUUID();
     const messageBody2 = `
-      多摩市のイベントの感想の募集をお知らせします<br>
+      イベントの感想の募集をお知らせします<br>
       イベント名：${target.title}<br>
       日時：${formatDTS(target.date)}<br>
       場所：${target.placement}<br>
