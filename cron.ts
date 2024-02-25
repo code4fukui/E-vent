@@ -7,11 +7,11 @@ export function startCron() {
   Deno.cron("Sample cron", "*/1 * * * *", async () => {
     console.log("Every minute, Deno Deploy runs this without a server");
     const eventItems = kv.list<EventItem>({ prefix: ["eventItems"] });
-    const now = formatDTS(new Date());
+    const now = formatDTS(new Date(new Date().getTime() + 3600 * 1000 * 9));
     for await (const eventItem of eventItems) {
       const target = eventItem.value;
       console.log("target", target);
-      const deadLine = formatDTS(new Date(target.joinDeadline));
+      const deadLine = formatDTS(new Date(target.joinDeadline).toUTCString);
       console.log("cron now=", now, "deadline=", deadLine);
       if (now == deadLine) {
         // 感想募集ツイート
