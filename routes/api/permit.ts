@@ -30,7 +30,13 @@ export const handler: Handlers = {
 
     // 募集ツイート
     const messageId1 = crypto.randomUUID();
-    const messageBody1 = target.title + "の参加者を募集！";
+    const messageBody1 = `
+      参加者募集：${target.title}\n
+      日時：${formatDTS(target.date)}\n
+      場所：${target.placement}\n
+      詳細：https://e-vent.deno.dev/event/${target.hash}\n
+      リプライするとこのイベントに申し込みできます
+      `;
     await kv.set(["messages", messageId1], {
       id: messageId1,
       body: messageBody1,
@@ -41,7 +47,13 @@ export const handler: Handlers = {
 
     // 感想募集ツイート
     const messageId2 = crypto.randomUUID();
-    const messageBody2 = target.title + "の感想を募集！";
+    const messageBody2 = `
+      感想募集：${target.title}\n
+      日時：${formatDTS(target.date)}\n
+      場所：${target.placement}\n
+      詳細：https://e-vent.deno.dev/event/${target.hash}\n
+      このイベントの感想をリプライで募集中
+    `;
     await kv.set(["messages", messageId2], {
       id: messageId2,
       body: messageBody2,
@@ -58,3 +70,14 @@ export const handler: Handlers = {
     });
   },
 };
+
+function formatDTS(date: Date) {
+  const year = date.getFullYear().toString();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const seconds = date.getSeconds().toString().padStart(2, "0");
+
+  return `${year}年${month}月${day}日 ${hours}時${minutes}分`;
+}
