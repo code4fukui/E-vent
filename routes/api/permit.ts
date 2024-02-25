@@ -31,7 +31,8 @@ export const handler: Handlers = {
     // 募集ツイート
     const messageId1 = crypto.randomUUID();
     const messageBody1 = `
-      参加者募集：${target.title}<br>
+      多摩市のイベントの予定をお知らせします<br>
+      イベント名：${target.title}<br>
       日時：${formatDTS(target.date)}<br>
       場所：${target.placement}<br>
       詳細：<a href="https://e-vent.deno.dev/event/${target.hash}">こちら</a><br>
@@ -49,7 +50,8 @@ export const handler: Handlers = {
     // 感想募集ツイート
     const messageId2 = crypto.randomUUID();
     const messageBody2 = `
-      感想募集：${target.title}<br>
+      多摩市のイベントの感想の募集をお知らせします<br>
+      イベント名：${target.title}<br>
       日時：${formatDTS(target.date)}<br>
       場所：${target.placement}<br>
       詳細：<a href="https://e-vent.deno.dev/event/${target.hash}">こちら</a><br>
