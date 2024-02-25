@@ -40,7 +40,7 @@ export default function Event(event: PageProps<EventItem>) {
         </section>
 
         <section class="mt-4">
-          <h3 class="text-xl font-bold">参加者一覧</h3>
+          <h3 id="joinners" class="text-xl font-bold">参加者一覧</h3>
           {item.joinners !== undefined
             ? (
               <ul class="mt-2">
@@ -60,7 +60,7 @@ export default function Event(event: PageProps<EventItem>) {
         </section>
 
         <section class="mt-4">
-          <h3 class="text-xl font-bold">コメント</h3>
+          <h3 id="comments" class="text-xl font-bold">コメント</h3>
           {item.comments !== undefined
             ? (
               <ul class="mt-2">
