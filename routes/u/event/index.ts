@@ -17,6 +17,7 @@ export const handler: Handlers = {
       "followers": `${entrypoint}u/event/followers`,
       "preferredUsername": "たまイベント",
       "name": "たまイベント",
+      "summary": "イベントの参加者の募集と感想の募集",
       "url": `${entrypoint}u/event`,
       publicKey: {
         id: `${entrypoint}u/event`,
