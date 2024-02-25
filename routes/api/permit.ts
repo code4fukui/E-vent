@@ -39,7 +39,7 @@ export const handler: Handlers = {
       詳細：<a href="https://e-vent.deno.dev/event/${target.hash}">こちら</a><br>
       ${
       target.prevEventId
-        ? `<a href="https://e-vent.deno.dev/event/${target.hash}#comments">前回の参加者の感想</a><br>`
+        ? `<a href="https://e-vent.deno.dev/event/${target.prevEventId}#comments">前回の参加者の感想</a><br>`
         : ""
     }
       <img src="${target.thumbnailUrl}"><br>
