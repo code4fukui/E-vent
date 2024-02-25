@@ -6,10 +6,10 @@ import config from "./fresh.config.ts";
 import "$std/dotenv/load.ts";
 import { startCron } from "./cron.ts";
 
-// const isBuildMode = Deno.args.includes("build");
-// if (!isBuildMode) {
-// cronの処理はこちら
-startCron();
-// }
+const isBuildMode = Deno.args.includes("build");
+if (!isBuildMode) {
+  // cronの処理はこちら
+  startCron();
+}
 
 await dev(import.meta.url, "./main.ts", config);
