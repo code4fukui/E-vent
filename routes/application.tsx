@@ -22,6 +22,7 @@ export const handler: Handlers = {
       Date.parse(form.get("joinDeadline") as string),
     );
     const placement = form.get("placement")?.toString() ?? "no place";
+    const prevEventId = form.get("prevEventId")?.toString() ?? undefined;
 
     console.log(
       typeof form.get("thumbnail"),
@@ -40,6 +41,7 @@ export const handler: Handlers = {
       date,
       placement,
       thumbnailUrl,
+      prevEventId,
       joinDeadline,
     };
     await kv.set(["eventItems", eventItem.hash], eventItem);
@@ -79,6 +81,16 @@ export default function Application() {
               placeholder="詳細を入力"
             >
             </textarea>
+          </label>
+          <label>
+            前回のイベントID<br />
+            <input
+              class="ev-input"
+              type="text"
+              name="prevEventId"
+              placeholder="(任意)前回のイベントid"
+            >
+            </input>
           </label>
           <label>
             開催日時<br />

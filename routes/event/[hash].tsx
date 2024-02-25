@@ -3,8 +3,8 @@ import { Fragment } from "preact";
 import { EventItem } from "../../interface/EventItem.interface.ts";
 import Header from "../../components/Header.tsx";
 import { kv } from "../../kv.ts";
-import { join } from "$std/path/join.ts";
 import { Head } from "$fresh/runtime.ts";
+import CopyToClipboard from "../../islands/CopyToClipboard.tsx";
 
 export const handler: Handlers<EventItem> = {
   async GET(_req, ctx) {
@@ -30,14 +30,28 @@ export default function Event(event: PageProps<EventItem>) {
       <Header />
       <main class="ev-main">
         <section>
-          <h2 class="ev-title">{item.title}</h2>
+          <h2 class="ev-title flex">
+            {item.title}
+            <CopyToClipboard body={item.hash} />
+          </h2>
           <img
-            class="w-full h-40 object-cover object-center bg-gray-300"
+            class="w-full h-fit object-cover object-center bg-gray-300"
             src={item.thumbnailUrl}
             alt={item.title}
           />
           <p class="mt-4">{item.description}</p>
         </section>
+
+        {item.prevEventId !== undefined
+          ? (
+            <a
+              class="mt-4 underline text-blue-700 hover:font-bold"
+              href={`/event/${item.prevEventId}#comments`}
+            >
+              前回イベントの感想を見てみる
+            </a>
+          )
+          : ""}
 
         <section class="mt-4">
           <h3 id="joinners" class="text-xl font-bold">参加者一覧</h3>

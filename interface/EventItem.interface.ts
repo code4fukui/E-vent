@@ -20,6 +20,7 @@ export interface EventItem {
   description: string;
   placement: string;
   thumbnailUrl: string;
+  prevEventId?: string;
   permitted?: boolean;
   joinners?: JoinPost[];
   comments?: CommentPost[];
