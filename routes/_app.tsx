@@ -8,7 +8,7 @@ export default function App({ Component }: PageProps) {
         <title>E-vent</title>
         <link rel="stylesheet" href="/styles.css" />
       </head>
-      <body>
+      <body class="pb-8">
         <Component />
       </body>
     </html>

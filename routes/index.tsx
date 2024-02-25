@@ -25,7 +25,7 @@ export default function Home(eventItems: PageProps<EventItem[]>) {
       <Header />
       <main class="ev-main">
         <h2 class="ev-title">イベント一覧</h2>
-        <section class="grid grid-cols-2 gap-2">
+        <section class="flex flex-col md:grid md:grid-cols-2 gap-2">
           {items.map((item) => <EventCard event={item} />)}
         </section>
       </main>
