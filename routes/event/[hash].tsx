@@ -4,6 +4,7 @@ import { EventItem } from "../../interface/EventItem.interface.ts";
 import Header from "../../components/Header.tsx";
 import { kv } from "../../kv.ts";
 import { join } from "$std/path/join.ts";
+import { Head } from "$fresh/runtime.ts";
 
 export const handler: Handlers<EventItem> = {
   async GET(_req, ctx) {
@@ -17,6 +18,15 @@ export default function Event(event: PageProps<EventItem>) {
   const item = event.data;
   return (
     <Fragment>
+      <Head>
+        <title>{item.title} - E-vent</title>
+        <meta property="og:url" content={event.url.href} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={item.title + " - E-vent"} />
+        <meta property="og:description" content={item.description} />
+        <meta property="og:site_name" content="E-vent" />
+        <meta property="og:image" content={item.thumbnailUrl} />
+      </Head>
       <Header />
       <main class="ev-main">
         <section>
