@@ -9,6 +9,7 @@ export async function uploadToCloudinary(body: Uint8Array) {
   const apiSecret = Deno.env.get("CLOUDINARY_API_SECRET")!;
 
   const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+  console.log(`upload to ${url}`);
   const timestamp = String(Math.trunc(new Date().getTime() / 1000));
   const signature = new Sha1().update(`timestamp=${timestamp}${apiSecret}`)
     .toString();
@@ -23,6 +24,7 @@ export async function uploadToCloudinary(body: Uint8Array) {
     method: "POST",
     body: formData,
   });
+  console.log(JSON.stringify(result));
   const json = await result.json();
   return json.secure_url;
 }
