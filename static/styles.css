@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .tooltip {
+    @apply relative;
+  }
+  .tooltip::before {
+    @apply content-[attr(data-tooltip)] absolute whitespace-nowrap bg-gray-700 text-center py-1 px-2 z-10 opacity-0 transition-opacity -top-8 left-0 rounded-md text-xs invisible text-white
+  }
+  .tooltip::after {
+    @apply content-[""] absolute -top-2 left-1/2 border-8 border-solid opacity-0 transition-opacity border-transparent border-t-gray-700 invisible
+  }
+
+  .tooltip:hover::before, .tooltip:hover::after {
+    @apply opacity-100 visible
+  }
+}
+
 @layer components {
   .ev-button {
     @apply w-fit mx-auto border-solid border-2 border-orange-500 px-4 py-2 rounded-full bg-white font-bold text-orange-500 transition-colors

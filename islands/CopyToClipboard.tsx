@@ -1,12 +1,13 @@
 export default function CopyToClipboard(
-  props: { body: string },
+  props: { body: string; tooltipText: string },
 ) {
   const copyToClipboard = async () => {
     await navigator.clipboard.writeText(props.body);
   };
   return (
     <button
-      class="w-8 h-8 grid place-content-center fill-gray-500"
+      class="w-8 h-8 grid place-content-center fill-gray-500 tooltip"
+      data-tooltip={props.tooltipText}
       onClick={copyToClipboard}
     >
       <svg
