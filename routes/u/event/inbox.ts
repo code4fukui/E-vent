@@ -36,6 +36,8 @@ export const handler: Handlers = {
         const inReplyTo = y.object.inReplyTo;
         if (inReplyTo && inReplyTo.startsWith(entrypoint)) {
           console.log("リプライ");
+          console.log("y.object", y.object);
+          console.log("y.object.content", y.object.content);
           const messageId = inReplyTo.split("/").slice(-1)[0];
           const message =
             (await kv.get<Message>(["messages", messageId])).value;
