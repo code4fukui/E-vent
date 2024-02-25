@@ -76,7 +76,13 @@ export default function Event(event: PageProps<EventItem>) {
                       </a>
                       {comment.images.map((image) => (
                         <a href={image}>
-                          <img src={image} width="128" />
+                          {image.endsWith(".mp4")
+                            ? (
+                              <video controls width="256">
+                                <source src={image} type="video/mp4" />
+                              </video>
+                            )
+                            : <img src={image} width="256" />}
                         </a>
                       ))}
                     </li>
