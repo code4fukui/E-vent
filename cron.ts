@@ -10,7 +10,7 @@ export function startCron() {
     const now = formatDTS(new Date());
     for await (const eventItem of eventItems) {
       const target = eventItem.value;
-      const deadLine = formatDTS(target.valuejoinDeadline);
+      const deadLine = formatDTS(target.joinDeadline);
       console.log("cron now=", now, "deadline=", deadLine);
       if (now == deadLine) {
         // 感想募集ツイート
