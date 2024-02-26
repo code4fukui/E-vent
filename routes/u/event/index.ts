@@ -24,7 +24,7 @@ export const handler: Handlers = {
       "summary": "イベントの参加者の募集と感想の募集",
       "url": `${entrypoint}u/event`,
       publicKey: {
-        id: `${entrypoint}u/event`,
+        id: `${entrypoint}u/event#main-key`,
         type: "Key",
         owner: `${entrypoint}u/event`,
         publicKeyPem: public_key_pem,
