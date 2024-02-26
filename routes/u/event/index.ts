@@ -20,7 +20,7 @@ export const handler: Handlers = {
       "inbox": `${entrypoint}u/event/inbox`,
       "outbox": `${entrypoint}u/event/outbox`,
       "followers": `${entrypoint}u/event/followers`,
-      "preferredUsername": "たまイベント",
+      "preferredUsername": "event",
       "name": "たまイベント",
       "summary": "イベントの参加者の募集と感想の募集",
       "url": `${entrypoint}u/event`,
