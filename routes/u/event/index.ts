@@ -10,9 +10,13 @@ export const handler: Handlers = {
       "@context": [
         "https://www.w3.org/ns/activitystreams",
         "https://w3id.org/security/v1",
+        {
+          "discoverable": "http://joinmastodon.org/ns#discoverable",
+        },
       ],
       "id": `${entrypoint}u/event`,
       "type": "Person",
+      "discoverable": true,
       "inbox": `${entrypoint}u/event/inbox`,
       "followers": `${entrypoint}u/event/followers`,
       "preferredUsername": "たまイベント",
