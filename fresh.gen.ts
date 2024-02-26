@@ -16,6 +16,7 @@ import * as $reset from "./routes/reset.ts";
 import * as $u_event_followers from "./routes/u/event/followers.ts";
 import * as $u_event_inbox from "./routes/u/event/inbox.ts";
 import * as $u_event_index from "./routes/u/event/index.ts";
+import * as $u_event_outbox from "./routes/u/event/outbox.ts";
 import * as $CopyToClipboard from "./islands/CopyToClipboard.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $EventCard from "./islands/EventCard.tsx";
@@ -38,6 +39,7 @@ const manifest = {
     "./routes/u/event/followers.ts": $u_event_followers,
     "./routes/u/event/inbox.ts": $u_event_inbox,
     "./routes/u/event/index.ts": $u_event_index,
+    "./routes/u/event/outbox.ts": $u_event_outbox,
   },
   islands: {
     "./islands/CopyToClipboard.tsx": $CopyToClipboard,

@@ -18,6 +18,7 @@ export const handler: Handlers = {
       "type": "Person",
       "discoverable": true,
       "inbox": `${entrypoint}u/event/inbox`,
+      "outbox": `${entrypoint}u/event/outbox`,
       "followers": `${entrypoint}u/event/followers`,
       "preferredUsername": "たまイベント",
       "name": "たまイベント",
