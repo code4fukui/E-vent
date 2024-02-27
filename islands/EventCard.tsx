@@ -4,6 +4,11 @@ export default function EventCard(
   props: { event: EventItem; isPermitter?: boolean },
 ) {
   let isBusy = false;
+  let pastEvent = (() => {
+    const eventHeld = new Date(props.event.date);
+    const now = new Date();
+    return eventHeld.getTime() < now.getTime();
+  })();
 
   const permitEvent = async ($event: Event) => {
     $event.preventDefault();
@@ -39,17 +44,20 @@ export default function EventCard(
 
   return (
     <a
-      class="w-full border-solid border-2 rounded-2xl overflow-hidden
-        border-gray-500 transition-colors
-        hover:border-orange-500 hover:shadow-gray-500 hover:shadow-md
-        focus:border-orange-500 focus:shadow-gray-500 focus:shadow-md"
+      class={"w-full border-solid border-2 rounded-2xl overflow-hidden border-gray-500 transition-colors " +
+        "hover:border-orange-500 hover:shadow-gray-500 hover:shadow-md focus:border-orange-500 focus:shadow-gray-500 focus:shadow-md" +
+        (pastEvent ? " bg-gray-300" : "")}
       href={`/event/${props.event.hash}`}
     >
-      <img
-        class="w-full h-40 object-cover object-center bg-gray-300"
-        src={props.event.thumbnailUrl}
-        alt={props.event.title}
-      />
+      <div
+        class={"w-full h-40 bg-cover bg-center bg-no-repeat grid place-content-center" +
+          (pastEvent ? " bg-blend-overlay bg-gray-500" : "")}
+        style={"background-image: url(" + props.event.thumbnailUrl + ")"}
+      >
+        {pastEvent
+          ? <span class="text-2xl font-bold text-white">終了</span>
+          : ""}
+      </div>
       <div class="px-4 pb-4">
         <h3 class="text-2xl font-bold my-2">{props.event.title}</h3>
         <p class="w-full overflow-hidden text-ellipsis whitespace-nowrap text-gray-700">
@@ -63,7 +71,7 @@ export default function EventCard(
             📍 {props.event.placement}
           </p>
         </section>
-        {props.isPermitter
+        {props.isPermitter && !pastEvent
           ? props.event.permitted === undefined
             ? !isBusy
               ? (
