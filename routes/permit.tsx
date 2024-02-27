@@ -38,7 +38,7 @@ export default function Permit(eventItems: PageProps<EventItem[]>) {
           <div
             class={"flex flex-col md:grid gap-2" +
               (needPermitEvents.length > 0
-                ? "md:grid-cols-2"
+                ? " md:grid-cols-2"
                 : " md:grid-cols-1")}
           >
             {needPermitEvents.length > 0
