@@ -6,6 +6,7 @@ import * as $_well_known_webfinger from "./routes/.well-known/webfinger.ts";
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $api_application from "./routes/api/application.ts";
+import * as $api_event from "./routes/api/event.ts";
 import * as $api_permit from "./routes/api/permit.ts";
 import * as $api_users_id_ from "./routes/api/users/[id].ts";
 import * as $application from "./routes/application.tsx";
@@ -30,6 +31,7 @@ const manifest = {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
     "./routes/api/application.ts": $api_application,
+    "./routes/api/event.ts": $api_event,
     "./routes/api/permit.ts": $api_permit,
     "./routes/api/users/[id].ts": $api_users_id_,
     "./routes/application.tsx": $application,
