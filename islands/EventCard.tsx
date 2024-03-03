@@ -14,7 +14,9 @@ export default function EventCard(
     $event.preventDefault();
     $event.stopPropagation();
     const res =
-      await (await fetch(`/api/permit?mode=permit&id=${props.event.hash}`))
+      await (await fetch(`/api/event?mode=permit&id=${props.event.hash}`, {
+        method: "PATCH",
+      }))
         .json();
     if (res?.success) {
       alert(`イベント「${props.event.title}」を承認しました`);
@@ -25,7 +27,9 @@ export default function EventCard(
     $event.preventDefault();
     $event.stopPropagation();
     const res =
-      await (await fetch(`/api/permit?mode=reject&id=${props.event.hash}`))
+      await (await fetch(`/api/event?mode=reject&id=${props.event.hash}`, {
+        method: "PATCH",
+      }))
         .json();
     if (res?.success) {
       alert(`イベント「${props.event.title}」を却下しました`);

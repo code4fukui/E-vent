@@ -72,7 +72,7 @@ export default function ApplicationForm() {
     formData.set("joinDeadline", joinDeadline);
     formData.set("thumbnail", await (await fetch(image)).blob());
 
-    const responce = await fetch("/api/application", {
+    const responce = await fetch("/api/event", {
       method: "POST",
       body: formData,
     });
