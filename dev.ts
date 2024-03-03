@@ -9,7 +9,7 @@ import { startCron } from "./cron.ts";
 const isBuildMode = Deno.args.includes("build");
 if (!isBuildMode) {
   // cronの処理はこちら
-  startCron();
+  // startCron();
 }
 
 await dev(import.meta.url, "./main.ts", config);
