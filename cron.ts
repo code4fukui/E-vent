@@ -2,6 +2,7 @@ import { kv } from "./kv.ts";
 import { EventItem } from "./interface/EventItem.interface.ts";
 import { formatDTS } from "./utils/date.ts";
 import { addNote } from "./activity_pub.ts";
+import { postToTwitter } from "./twitter.ts";
 
 export function startCron() {
   Deno.cron("Sample cron", "*/1 * * * *", async () => {
@@ -32,6 +33,7 @@ export function startCron() {
           type: "comment",
         });
         await addNote(messageId2, messageBody2);
+        await postToTwitter(messageBody2);
       }
     }
   });

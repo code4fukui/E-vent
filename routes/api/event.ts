@@ -4,6 +4,7 @@ import { EventItem } from "../../interface/EventItem.interface.ts";
 import { kv } from "../../kv.ts";
 import { uploadToCloudinary } from "../../utils/cloudinary.ts";
 import { formatDTS } from "../../utils/date.ts";
+import { postToTwitter } from "../../twitter.ts";
 
 export const handler: Handlers = {
   async POST(req, _ctx) {
@@ -94,6 +95,7 @@ export const handler: Handlers = {
       type: "joinner",
     });
     await addNote(messageId1, messageBody1);
+    await postToTwitter(messageBody1);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,

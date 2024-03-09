@@ -3,6 +3,7 @@ import { kv } from "../../kv.ts";
 import { EventItem } from "../../interface/EventItem.interface.ts";
 import { addNote } from "../../activity_pub.ts";
 import { formatDTS } from "../../utils/date.ts";
+import { postToTwitter } from "../../twitter.ts";
 
 export const handler: Handlers = {
   async GET(_req: Request, ctx: FreshContext) {
@@ -52,6 +53,7 @@ export const handler: Handlers = {
       type: "joinner",
     });
     await addNote(messageId1, messageBody1);
+    await postToTwitter(messageBody1);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
