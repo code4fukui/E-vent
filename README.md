@@ -1,5 +1,7 @@
 # E-vent
 
+> 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
+
 E-vent is a web-based platform for organizing and participating in community events.
 
 ## Features

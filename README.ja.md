@@ -26,3 +26,5 @@ deno task start
 
 ## ライセンス
 MIT License
+
+Copyright (c) 2024 Code for FUKUI
