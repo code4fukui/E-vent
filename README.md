@@ -30,6 +30,4 @@ This will watch the project directory and restart as necessary.
 
 ## License
 
-MIT License
-
-Copyright (c) 2024 Code for FUKUI
+MIT License — see [LICENSE](LICENSE).
