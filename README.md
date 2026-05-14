@@ -1,9 +1,22 @@
-# Fresh project
+# E-vent
 
-Your new Fresh project is ready to go. You can follow the Fresh "Getting
-Started" guide here: https://fresh.deno.dev/docs/getting-started
+> 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
 
-### Usage
+E-vent is a web-based platform for organizing and participating in community events.
+
+## Features
+
+- Create and manage events with details like date, location, and description
+- Apply for event participation and leave comments
+- Automatic tweet announcements for new events and deadlines
+- Approval process for event organizers
+
+## Requirements
+
+- Deno runtime
+- Cloudinary and Twitter API credentials
+
+## Usage
 
 Make sure to install Deno: https://deno.land/manual/getting_started/installation
 
@@ -14,3 +27,7 @@ deno task start
 ```
 
 This will watch the project directory and restart as necessary.
+
+## License
+
+MIT License — see [LICENSE](LICENSE).
